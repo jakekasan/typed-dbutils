@@ -1,13 +1,22 @@
 from typing import Dict, List, Protocol
 
-# fsutils
 
 class FileInfo(Protocol):
-    name: str
     path: str
+    name: str
+    size: int
+    modificationTime: int
     
     def isDir(self) -> bool:
         ...
+
+    def isPath(self) -> bool:
+        ...
+
+class MountInfo(Protocol):
+    mountPoint: str
+    source: str
+    encryptionType: str
 
 def cp(from_: str, to: str, recurse: bool = False) -> bool:
     ...
@@ -30,8 +39,6 @@ def put(file: str, contest: str, overwrite: bool = False) -> bool:
 def rm(dir: str, recurse: bool = False) -> bool:
     ...
 
-# mount
-
 def mount(source: str,
           mount_point: str,
           encryption_type: str = "",
@@ -39,15 +46,13 @@ def mount(source: str,
           extra_configs: Dict[str, str] = None) -> None:
     ...
 
-# TODO: is this a method or property? Docs describes it like a property on `dbutils.fs`
-def mounts() -> List[str]:
+def mounts() -> List[MountInfo]:
     ...
 
-# TODO: is this a method or property? Docs describes it like a property on `dbutils.fs`
 def refreshMounts() -> bool:
     ...
 
-def unmount(mountPoint: str) -> bool:
+def unmount(mount_point: str) -> bool:
     ...
 
 def updateMount(source: str,
