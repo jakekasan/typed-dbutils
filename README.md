@@ -1,5 +1,5 @@
 # typed-dbutils
-A type-stub for Databricks' DBUtils package.
+A type-stub for Databricks' DBUtils package. The intent is for this to be used when developing outside of databricks and dbutils isn't available.
 
 ## TODO add hints for:
 
